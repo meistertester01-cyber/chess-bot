@@ -9,7 +9,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # ВАЖНО: ЗАМЕНИ ЭТУ ССЫЛКУ на реальную ссылку Telegram Александра!
-ALEXANDER_LINK = "https://t.me/username_Александра" 
+ALEXANDER_LINK = "https://t.me/otecalexander 
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
