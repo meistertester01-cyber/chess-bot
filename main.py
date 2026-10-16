@@ -19,10 +19,9 @@ async def cmd_start(message: types.Message):
     # Получаем имя пользователя из Telegram
     user_name = message.from_user.first_name
     
-    # 1. Отправляем кружок (ВСТАВЬ СЮДА ID КРУЖКА от @RawDataBot)
-    # Если ID пока нет — оставь как есть, бот просто пропустит этот шаг
+    # 1. Отправляем кружок (ID уже вставлен)
     try:
-        await message.answer_video_note(video_note="СЮДА_ВСТАВЬ_ID_КРУЖКА")
+        await message.answer_video_note(video_note="DQACAgQAAxkBAAFWLQpq0f7g27FpybreOSTHnBhPabJW6gACwR8AAvDIkVKlQGRYEB6VPT0E")
     except Exception as e:
         logging.error(f"Ошибка при отправке кружка: {e}")
         
