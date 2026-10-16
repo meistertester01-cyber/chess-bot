@@ -16,6 +16,17 @@ dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
+    # Получаем имя пользователя из Telegram
+    user_name = message.from_user.first_name
+    
+    # 1. Отправляем кружок (ВСТАВЬ СЮДА ID КРУЖКА от @RawDataBot)
+    # Если ID пока нет — оставь как есть, бот просто пропустит этот шаг
+    try:
+        await message.answer_video_note(video_note="СЮДА_ВСТАВЬ_ID_КРУЖКА")
+    except Exception as e:
+        logging.error(f"Ошибка при отправке кружка: {e}")
+        
+    # 2. Отправляем текст с кнопками, обращаясь по имени
     kb = InlineKeyboardBuilder()
     kb.button(text="🎁 Получить материалы", callback_data="materials")
     kb.button(text="♟️ О занятиях", callback_data="about")
@@ -23,11 +34,13 @@ async def cmd_start(message: types.Message):
     kb.button(text="✍️ Записаться к Александру", url=ALEXANDER_LINK)
     kb.adjust(1) # Кнопки в один столбик
     
-    await message.answer(
-        "Привет! Я бот-помощник Александра по шахматам. ♟️\n\n"
-        "Здесь ты можешь получить полезные материалы и записаться на пробное занятие.",
-        reply_markup=kb.as_markup()
+    greeting_text = (
+        f"Привет, {user_name}! 👋\n\n"
+        "Я бот-помощник Александра по шахматам. ♟️\n\n"
+        "Здесь ты можешь получить полезные материалы и записаться на пробное занятие."
     )
+    
+    await message.answer(greeting_text, reply_markup=kb.as_markup())
 
 @dp.callback_query(F.data == "materials")
 async def send_materials(callback: types.CallbackQuery):
